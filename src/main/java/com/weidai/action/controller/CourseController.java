@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sun.deploy.net.HttpResponse;
+import com.weidai.action.model.BaseObject;
 import com.weidai.action.model.Course;
 import com.weidai.action.service.CourseService;
 import org.apache.commons.io.FileUtils;
@@ -50,9 +51,9 @@ public class CourseController {
     public String viewCourse(@RequestParam("courseId") Integer courseId,
                              Model model) {
         log.debug("In viewCourse, courseId = {}", courseId);
-        Course course = courseService.getCoursebyId(courseId);
-        model.addAttribute(course);
-        return "course_overview";
+        BaseObject<Course> course = courseService.getCoursebyId(courseId);
+        model.addAttribute(course.d);
+        return "login";
     }
 
     //本方法将处理 /courses/view2/123 形式的URL
@@ -61,8 +62,8 @@ public class CourseController {
                               Map<String, Object> model) {
 
         log.debug("In viewCourse2, courseId = {}", courseId);
-        Course course = courseService.getCoursebyId(courseId);
-        model.put("course", course);
+        BaseObject<Course> course = courseService.getCoursebyId(courseId);
+        model.put("course", course.d);
         return "course_overview";
     }
 
@@ -71,8 +72,8 @@ public class CourseController {
     public String viewCourse3(HttpServletRequest request) {
 
         Integer courseId = Integer.valueOf(request.getParameter("courseId"));
-        Course course = courseService.getCoursebyId(courseId);
-        request.setAttribute("course", course);
+       BaseObject<Course> course = courseService.getCoursebyId(courseId);
+        request.setAttribute("course", course.d);
 
         return "course_overview";
     }
@@ -133,15 +134,15 @@ public class CourseController {
     @RequestMapping(value = "/{courseId}", method = RequestMethod.GET)
     @ResponseBody
 
-    public Course getCourseInJson(@PathVariable Integer courseId, HttpServletResponse response) {
+    public BaseObject<Course> getCourseInJson(@PathVariable Integer courseId, HttpServletResponse response) {
         return courseService.getCoursebyId(courseId);
     }
 
 
     @RequestMapping(value = "/jsontype/{courseId}", method = RequestMethod.GET)
-    public ResponseEntity<Course> getCourseInJson2(@PathVariable Integer courseId) {
-        Course course = courseService.getCoursebyId(courseId);
-        return new ResponseEntity<Course>(course, HttpStatus.OK);
+    public ResponseEntity<BaseObject<Course>> getCourseInJson2(@PathVariable Integer courseId) {
+       BaseObject<Course> course = courseService.getCoursebyId(courseId);
+        return new ResponseEntity<BaseObject<Course>>(course, HttpStatus.OK);
     }
 
 

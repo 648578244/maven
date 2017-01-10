@@ -1,5 +1,6 @@
 package com.weidai.action.service.impl;
 
+import com.weidai.action.model.BaseObject;
 import com.weidai.action.model.Chapter;
 import com.weidai.action.model.Course;
 import com.weidai.action.service.CourseService;
@@ -13,7 +14,7 @@ import java.util.List;
  */
 @Service("courseService")
 public class CourseServiceImpl implements CourseService {
-    public Course getCoursebyId(Integer courseId) {
+    public BaseObject<Course> getCoursebyId(Integer courseId) {
         Course course = new Course();
         course.setCourseId(courseId);
         course.setTitle("深入浅出Java多线程");
@@ -24,17 +25,22 @@ public class CourseServiceImpl implements CourseService {
         course.setDuration(7200l);
         course.setDescr("多线程是日常开发中的常用知识，也是难用知识。bala bala...");
         List<Chapter> chapterList = new ArrayList<Chapter>();
-        warpChapterList(courseId,chapterList);
+        warpChapterList(courseId, chapterList);
         course.setChapterList(chapterList);
-        return course;
+        BaseObject object = new BaseObject<Course>();
+        object.d = course;
+        object.r = 1;
+        object.msg="成功";
+        return object;
     }
-    private void warpChapterList(Integer courseId,List<Chapter> chapterList) {
+
+    private void warpChapterList(Integer courseId, List<Chapter> chapterList) {
         for (int i = 0; i < 10000; i++) {
             Chapter chapter = new Chapter();
             chapter.setId(1);
             chapter.setCourseId(courseId);
             chapter.setOrder(1);
-            chapter.setTitle("第"+i+"章 多线程背景知识介绍");
+            chapter.setTitle("第" + i + "章 多线程背景知识介绍");
             chapter.setDescr("本章将介绍与多线程编程相关的背景概念");
             chapter.setImageUrl("http://192.168.13.51:8080/resources/imgs/course-img.jpg");
             chapterList.add(chapter);

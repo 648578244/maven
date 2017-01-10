@@ -45,5 +45,12 @@
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.8.4" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.8.0" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.8.4" level="project" />
+    <orderEntry type="library" name="Maven: org.mybatis:mybatis-spring:1.2.2" level="project" />
+    <orderEntry type="library" name="Maven: org.mybatis:mybatis:3.2.8" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-jdbc:4.3.4.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-tx:4.3.4.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-aspects:4.3.4.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.aspectj:aspectjweaver:1.8.9" level="project" />
+    <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.38" level="project" />
   </component>
 </module>

@@ -24,8 +24,11 @@ public class GzipFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
                          FilterChain chain) throws IOException, ServletException {
         String parameter = request.getParameter("gzip");
+
         // 判断是否包含了 Accept-Encoding 请求头部
         HttpServletRequest s = (HttpServletRequest) request;
+        String head = s.getHeader("head");
+        System.out.println("头部："+head);
         //"1".equals(parameter) 只是为了控制，如果传入 gzip=1，才执行压缩，目的是测试用
         HttpServletResponse resp = (HttpServletResponse) response;
         final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
